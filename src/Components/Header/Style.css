@@ -1,0 +1,9 @@
+.navbar-nav li {
+    border: #05b9aa solid 1px  ;
+    border-radius: 5px;
+    text-align: center;
+   
+    height: 36px;
+    font-size: 13px;
+   line-height: 24px;
+}
