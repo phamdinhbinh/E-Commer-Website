@@ -14,22 +14,22 @@ const Header = () => {
     <div className="collapse navbar-collapse order-4 order-md-1 mt-1 mt-sm-0" id="navbarTogglerDemo02">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-1 row-cols-2  ">
         <li className="nav-item  ">
-          <Link className="nav-link p-1 text-dark h-100 d-inline-block  "  href="#">Home</Link>
+          <Link className="nav-link p-1 text-dark h-100 w-100  d-inline-block  "  href="#">Home</Link>
         </li>
         <li className="nav-item ">
-          <Link className="nav-link p-1 text-dark h-100 d-inline-block " href="#">Link</Link>
+          <Link className="nav-link p-1 text-dark h-100 w-100 d-inline-block " href="#">Link</Link>
         </li>
         <li className="nav-item ">
-          <Link className="nav-link p-1 text-dark h-100 d-inline-block" href="#">Link</Link>
+          <Link className="nav-link p-1 text-dark h-100 w-100 d-inline-block" href="#">Link</Link>
         </li>
         <li className="nav-item ">
-          <Link className="nav-link p-1 text-dark h-100 d-inline-block" href="#">Link</Link>
+          <Link className="nav-link p-1 text-dark h-100 w-100 d-inline-block" href="#">Link</Link>
         </li>
         <li className="nav-item ">
-          <Link className="nav-link p-1 text-dark h-100 d-inline-block" href="#">Link</Link>
+          <Link className="nav-link p-1 text-dark h-100 w-100 d-inline-block" href="#">Link</Link>
         </li>
         <li className="nav-item ">
-          <Link className="nav-link p-1 text-dark h-100 d-inline-block" href="#">Link</Link>
+          <Link className="nav-link p-1 text-dark h-100 w-100 d-inline-block" href="#">Link</Link>
         </li>
       </ul>
       <form className="d-flex border border-1 rounded bg-white " role="search">
