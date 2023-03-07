@@ -4,11 +4,15 @@ import { BrowserRouter, Router, Route, Routes } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
+import store from "./store/store";
 import Cart from './pages/Cart';
+import {Provider} from "react-redux";
+
 function App() {
   return (
     <>
-      <BrowserRouter>
+    <Provider store = {store}>
+    <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
@@ -17,6 +21,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+    </Provider>
+      
     </>
   );
 }
