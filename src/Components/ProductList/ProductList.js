@@ -3,7 +3,7 @@ import Product from "../Product/Product";
 
 const ProductList = ({products}) => {
   return (
-    <div className='product-lists row row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4'>
+    <div className='product-lists row row-cols-1 row-cols-md-2 row-cols-lg-4 gx-4 mt-5'>
       {
         products.map(product => {
           let temp = (product.price) - (product.price * (product.discountPercentage / 100));

@@ -5,7 +5,7 @@ import './Style.css';
 const Header = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-info bg-gradient">
+      <nav className="navbar navbar-expand-lg bg-info bg-gradient fixed-top ">
     <div className="container-fluid mx-md-2 mx-lg-5">
     <Link className="navbar-brand  order-1 me-0 me-md-2 " href="#">Logo Brand</Link>
     <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
