@@ -1,19 +1,43 @@
-import React from 'react';
+import React ,{useEffect, useState} from 'react';
 import './ProductStyle.css';
 import 'bootstrap/dist/css/bootstrap.css';
-
-
+import {useParams} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import { fetchAsyncProductSingle, getProductSingle, } from '../../store/productSlice';
 const Product = () => {
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const product = useSelector(getProductSingle);
+  
+    // getting single product
+    useEffect(() => {
+      dispatch(fetchAsyncProductSingle(id));
+    }, []);
+
+    let temp = (product.price) - (product.price * (product.discountPercentage / 100));
+
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md-6 item-photo">
                     <img style={{ maxWidth: '60%' }}
-                        src="https://product.hstatic.net/1000088324/product/4_ff0673fd351a4b858949cbcddc818790_master.png" />
+                        src={product?(product.images ? product.images[0] : "") : ""} />
                 </div>
                 <div className="col-md-6" style={{ border: '0px', paddingTop:'20px' }}>
-                    <h1>T Shirt 001</h1>
-                    <h3 style={{ marginTop: '0px' }}>250.000đ</h3>
+                    <h1>{product?.title}</h1>
+                    <h3 style={{ marginTop: '0px' }}>
+                            <div className='price'>
+                                <div className='old-price '>
+                                    ${product?.price.toFixed(2)}
+                                </div>
+                                <span className='new-price '>
+                                    ${temp.toFixed(2)}
+                                    </span>
+                                <div className='discount  '>
+                                ({product.discountPercentage} % OFF )
+                                </div>
+                            </div>
+                        </h3>
 
                     <div className="section">
                         <h4 className="title-attr" style={{ marginTop: '15px' }}><small>COLOR</small></h4>

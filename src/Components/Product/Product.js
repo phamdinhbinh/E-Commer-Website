@@ -5,7 +5,7 @@ import './Product.css'
 const Product = ({product}) => {
   
   return (
-    <Link className='product d-flex justify-content-center align-items-center text-decoration-none ' to={`/product/${product?.id}`} key={product?.id}>
+    <Link to = {`/product/${product?.id}`} key = {product?.id} className='product d-flex justify-content-center align-items-center text-decoration-none ' to={`/product/${product?.id}`} key={product?.id}>
     <div className='card product-item bg-white p-2'>
       <div className='category '>{product?.category}</div>
       <div className='product-item-img d-flex justify-content-center '>
