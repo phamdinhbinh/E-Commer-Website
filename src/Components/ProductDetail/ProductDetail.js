@@ -9,7 +9,6 @@ const Product = () => {
     const dispatch = useDispatch();
     const product = useSelector(getProductSingle);
   
-    // getting single product
     useEffect(() => {
       dispatch(fetchAsyncProductSingle(id));
     }, []);
@@ -28,7 +27,7 @@ const Product = () => {
                     <h3 style={{ marginTop: '0px' }}>
                             <div className='price'>
                                 <div className='old-price '>
-                                    ${product?.price.toFixed(2)}
+                                    ${product?.price}
                                 </div>
                                 <span className='new-price '>
                                     ${temp.toFixed(2)}
