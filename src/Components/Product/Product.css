@@ -2,52 +2,88 @@
     text-align: center;
     height: 200 px;
     width: 100% ;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.05) 0px 2px 5px -1px, rgba(0, 0, 0, 0.05) 0px 1px 3px -1px;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
 }
-
-.product{
-    width: 100%;
+.product-item:hover{
+    box-shadow: rgba(50, 50, 93, 0.1) 5px 5px 5px 2px, rgba(0, 0, 0, 0.1) 2px 2px 20px -1px;
+    background-color: rgb(236, 243, 243);
 }
-
+.product-item-img{
+    transition: transform 0.5s;
+   
+}
+.product-item-img:hover{
+    transform: scale(1.1);
+    z-index: 1;
+}
 .category{
-    text-align: center;
+    position: absolute;
     left: -5px;
-    top: 1.6rem;
-    background-color:white;
-    color: black;
-    font-size: 15px;
+    top: 0.5rem;
+    background-color: #F94E30;
+    color: #fff;
+    font-size: 13px;
     text-transform: capitalize;
     padding: 0.2rem 1rem;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    text-decoration: none;
-    margin-bottom: 8px;
-    font-weight: 500;
+    z-index: 2;
+}
+
+.category::after{
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 100%;
+    transform: translateY(-5px);
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #F94E30;
 }
 
 .title{
+    position: relative;
     font-size: 15.5px;
     font-weight: 600;
     letter-spacing: 0.3px;
     color: rgb(0, 0, 0);
 }
-
-.old-price{
-    display: inline-block;
+.product-item-info{
+    font-size: 14px;
+}
+.price-product{
+    position: relative;
+}
+.price-product .old-price{
     opacity: 0.7;
     text-decoration: line-through;
-    font-size: 13px;
-    height: 100%;
+    font-size: 14px;
+   
 }
-.new-price{
-    display: inline-block;
-    margin: 0 1rem;
+.price-product .new-price{
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
+    flex: 0 0 auto;
 }
-.discount{
-    display: inline-block;
-    font-size: 13px;
+.price-product .discount{
+    font-size: 11px;
     font-weight: 600;
-    color: rgb(236, 52, 52);
-    height: 100%;
+    color: darken(#F94E30, 5%);
+   
+
+}
+
+.price-product::after{
+    content: "";
+    position: absolute;
+    top: calc(100% + 6px);
+    height: 2px;
+    background-color: #F94E30;
+    width: 60px;
 }
 

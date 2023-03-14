@@ -4,17 +4,25 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {useParams} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import { fetchAsyncProductSingle, getProductSingle, } from '../../store/productSlice';
+import { addToCart } from '../../store/cartSlice';
 const Product = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const product = useSelector(getProductSingle);
-  
+    const [quantity, setQuantity] = useState(1);
     useEffect(() => {
       dispatch(fetchAsyncProductSingle(id));
     }, []);
 
     let temp = (product.price) - (product.price * (product.discountPercentage / 100));
 
+    const addToCartHandler = (product) => {
+        let discountedPrice = (product?.price) - (product?.price * (product?.discountPercentage / 100));
+        let totalPrice = quantity * discountedPrice;
+        console.log('trước',product);
+        dispatch(addToCart({...product, quantity, totalPrice, discountedPrice}));
+        
+      }
     return (
         <div className="container">
             <div className="row">
@@ -60,7 +68,7 @@ const Product = () => {
                             <div className="btn-minus"><span > - </span></div>
                             <input value="1" />
                             <div className="btn-plus"><span > + </span></div>
-                            <button className="btn btn-success"><span style={{ marginLeft: '0px' }} className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to cart</button>
+                            <button className="btn btn-success" onClick={() => { addToCartHandler(product)}} ><span style={{ marginLeft: '0px' }} className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to cart</button>
                         </div>
                     </div>
                     <div>

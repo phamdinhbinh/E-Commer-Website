@@ -9,7 +9,7 @@ const ProductList = ({products}) => {
           let temp = (product.price) - (product.price * (product.discountPercentage / 100));
           let discountedPrice = temp.toFixed(2);
           return (
-            <div className="col mb-4" key={product.id}>
+            <div className="px-1 mb-4" key={product.id}>
               <Product product={{...product, discountedPrice}} />
             </div>
           )

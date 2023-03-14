@@ -7,3 +7,100 @@
     font-size: 13px;
    line-height: 24px;
 }
+.main-content {
+    margin-top: 80px;
+   
+}
+.header-navbar{
+  height: 40px;
+}
+.container-header{
+    height: 80px;
+}
+.search {
+    height: 40px;
+}
+.btn-search{
+    height: 40px ;
+}
+.user-nav {
+    width: 120px ;
+    height: 40px;
+    font-size: 20px;
+    color: rgb(117, 117, 126);
+}
+.user-nav:hover   {
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: rgba(39, 39, 42, 0.12);
+   
+}
+
+.user-nav-content-home {
+    font-size: 14px ;
+    text-decoration: none ;
+    color: rgb(117, 117, 126);
+}
+.user-nav-content {
+    font-size: 14px ;
+    text-decoration: none ;
+    color: rgb(117, 117, 126);
+}
+
+
+.cart-nav{
+    font-size: 20px;
+    height: 100%;
+    position: relative;
+    color: rgb(117, 117, 126);
+}
+.cart-nav:hover{
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: rgba(39, 39, 42, 0.12);
+    
+}
+.cart-nav:hover .cart-modal {
+    opacity: 1;
+    visibility: visible;
+}
+.cart-nav::before{
+    content: "";
+    display: block;
+    position: absolute;
+    border-left: 1px solid rgb(221, 221, 227);
+    left: 0px;
+    top: 8px;
+}
+
+.form-control:focus {
+    box-shadow: none !important ; 
+    border-color: none !important ; 
+  }
+ 
+.btn-nav{
+    width: 92px;
+    position: relative;
+    background-color: white;
+}
+.btn-nav::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-left: 1px solid rgb(221, 221, 227);
+    height: 24px;
+    left: 0px;
+    top: 8px;
+}
+
+
+.btn-nav:hover {
+    background-color: rgba(10, 104, 255, 0.2);
+
+}
+
+.nav-category{
+  font-size: 13px;
+  color: rgb(128, 128, 137);
+
+}

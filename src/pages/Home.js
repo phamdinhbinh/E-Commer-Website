@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductList from '../Components/ProductList/ProductList';
+import HeaderSlider from '../Components/slider/slider';
 import { fetchAsyncProducts, getAllProducts} from '../store/productSlice';
 
 const HomePage = () => {
@@ -28,8 +29,9 @@ const HomePage = () => {
   return (
     <main>
       
-      <div className='main-content bg-whitesmoke mt-3'>
-        <div className='container'>
+      <div className='main-content  bg-light '>
+        <div className='container '>
+          <HeaderSlider/>
           <div className='categories py-5 '>
             <div className='categories-item'>
               <div className='title-md'>
