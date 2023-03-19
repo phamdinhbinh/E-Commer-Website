@@ -7,6 +7,9 @@ import ProductDetail from './pages/ProductDetail';
 import store from "./store/store";
 import Cart from './pages/Cart';
 import {Provider} from "react-redux";
+import Login from './Components/login/login';
+import RegistrationForm from './Components/register/register';
+import LogoutButton from './Components/logout';
 
 function App() {
   return (
@@ -18,7 +21,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path='/product/:id' element={<ProductDetail />} />
             <Route path='cart' element={<Cart />} />
-        
+            <Route path='login' element={<Login/>} />
+            <Route path='register' element={<RegistrationForm/>} />
+            <Route path='logout' element={<LogoutButton/>} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,9 +1,34 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+export const getCartFromLocalStorage = () => {
+    const cartData = localStorage.getItem('statusUser');
+    if (cartData) {
+      const cartObject = JSON.parse(cartData);
+      console.log(cartObject.login);
+    if (cartObject.login === true) {
+        const getCart = JSON.parse(localStorage.getItem(cartObject.nameUser));
+        console.log('đây này ',getCart);
+        return getCart.Cart;
+    }
+    
+    return []; 
+    }
+    return [];
+  };
 
+  const storeInLocalStorage = (data) => {
+    const cartObject = JSON.parse(localStorage.getItem('statusUser'));
+    const cartData = JSON.parse(localStorage.getItem(cartObject.nameUser));
+    const updatedCartData = {
+      ...cartData,
+      Cart: data
+    };
+    localStorage.setItem(cartObject.nameUser, JSON.stringify(updatedCartData));
+  }
+  
 
 const initialState = {
-    carts: [] ,
+    carts: getCartFromLocalStorage(),
     itemsCount: 0,
     totalAmount: 0,
     isCartMessageOn: false
@@ -33,10 +58,11 @@ const cartSlice = createSlice({
                 });
 
                 state.carts = tempCart;
+                storeInLocalStorage(state.carts);
                 
             } else {
                 state.carts.push(action.payload);
-                
+                storeInLocalStorage(state.carts);
             }
            
         },
@@ -95,11 +121,16 @@ const cartSlice = createSlice({
 
         setCartMessageOff: (state) => {
             state.isCartMessageOn = false;
+        },
+
+        updateCartsFromLocalStorage: (state) => {
+            state.carts = getCartFromLocalStorage();
         }
+
     }
 });
 
-export const {addToCart, setCartMessageOff, setCartMessageOn, getCartTotal, toggleCartQty, clearCart, removeFromCart} = cartSlice.actions;
+export const {addToCart, updateCartsFromLocalStorage, setCartMessageOff, setCartMessageOn, getCartTotal, toggleCartQty, clearCart, removeFromCart} = cartSlice.actions;
 export const getAllCarts = (state) => state.cart.carts;
 export const getCartItemsCount = (state) => state.cart.itemsCount;
 export const getCartMessageStatus = (state) => state.cart.isCartMessageOn;

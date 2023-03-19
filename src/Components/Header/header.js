@@ -7,6 +7,7 @@ import {fetchAsyncCategories, getAllCategories } from '../../store/categorySlice
 import { getAllCarts } from '../../store/cartSlice';
 import CartModal from '../nav-cart/navCart';
 import './Style.css';
+import UserNav from '../nav-user/nav-user';
 
 
 const Header = () => {
@@ -35,16 +36,16 @@ const Header = () => {
 
         <div className='user col-4 d-flex justify-content-end align-items-center'>
           <div className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center'>
-            <FiHome  className=' mx-2' /> 
+            <FiHome  className='mx-2' /> 
             <Link to='/' className='user-nav-content-home'>
                 Trang chủ 
             </Link>
             </div>
 
-          <div className='d-flex user-nav test py-8 px-16 justify-content-center mx-2 align-items-center'>
+          <div className='user-nav d-flex  test py-8 px-16 justify-content-center mx-2 align-items-center'>
             <FiUser  className=' mx-2' /> 
             <div className='user-nav-content'>
-                Tài khoản 
+               <UserNav/>
             </div>
             </div>
 
