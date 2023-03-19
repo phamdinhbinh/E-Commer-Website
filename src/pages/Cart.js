@@ -1,9 +1,10 @@
 import React from 'react'
+import CartView from '../Components/CartView/CartView'
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <CartView/>
   )
 }
 
-export default Cart
+export default Cart;
