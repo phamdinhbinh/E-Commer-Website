@@ -1,0 +1,18 @@
+.footer{
+    margin: 0;
+    box-sizing: border-box;
+}
+.container--footer{
+    height: 300px;
+    width: 100%;
+    background-color: #fbfbfb;
+    display: flex;
+    justify-content: space-around;
+}
+.title{
+    padding-top: 40px;
+    margin-top: 10px;
+}
+.detail{
+    cursor: pointer;
+}
