@@ -19,3 +19,10 @@
 
 } */
 
+.user-content {
+    font-size: 14px ;
+    text-decoration: none ;
+    color: rgb(117, 117, 126);
+    background-color: #fff;
+    background-color: transparent;
+}

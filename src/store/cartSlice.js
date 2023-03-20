@@ -1,21 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 export const getCartFromLocalStorage = () => {
+    
     const cartData = localStorage.getItem('statusUser');
     if (cartData) {
       const cartObject = JSON.parse(cartData);
-      console.log(cartObject.login);
-    if (cartObject.login === true) {
+      if (cartObject.login === true) {
         const getCart = JSON.parse(localStorage.getItem(cartObject.nameUser));
-        console.log('đây này ',getCart);
-        return getCart.Cart;
-    }
-    
-    return []; 
+        if (getCart && getCart.Cart) {
+          return getCart.Cart;
+        }
+      }
+     return [];
     }
     return [];
   };
-
+  
   const storeInLocalStorage = (data) => {
     const cartObject = JSON.parse(localStorage.getItem('statusUser'));
     const cartData = JSON.parse(localStorage.getItem(cartObject.nameUser));
@@ -31,7 +31,7 @@ const initialState = {
     carts: getCartFromLocalStorage(),
     itemsCount: 0,
     totalAmount: 0,
-    isCartMessageOn: false
+    statusLogin: false
 }
 
 const cartSlice = createSlice({
@@ -39,12 +39,18 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            console.log('sau',action.payload);
+            console.log('test',state.statusLogin);
+            const cartObject = JSON.parse(localStorage.getItem('statusUser'));
+            if (!cartObject ||cartObject.login !== true) {
+                // Không cho thêm vào giỏ hàng nếu chưa đăng nhập
+                alert('vui lòng đăng nhập');
+                return;
+            }
+           
             const isItemInCart = state.carts.find(item => item.id === action.payload.id);
 
             if(isItemInCart){
                 const tempCart = state.carts.map(item => {
-                    console.log(item.quantity);
                     if(item.id === action.payload.id){
                         let tempQty = item.quantity + action.payload.quantity;
                         let tempTotalPrice = tempQty * item.price;
@@ -113,26 +119,21 @@ const cartSlice = createSlice({
             state.carts = tempCart;
             
         },
-
-        setCartMessageOn: (state) => {
-            state.isCartMessageOn = true;
-            
-        },
-
-        setCartMessageOff: (state) => {
-            state.isCartMessageOn = false;
-        },
-
         updateCartsFromLocalStorage: (state) => {
             state.carts = getCartFromLocalStorage();
+            const cartObject = JSON.parse(localStorage.getItem('statusUser'));
+            if (!cartObject ||cartObject.login !== true) 
+                {state.statusLogin = false;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            else state.statusLogin = true;       
+            
         }
-
     }
+
 });
 
-export const {addToCart, updateCartsFromLocalStorage, setCartMessageOff, setCartMessageOn, getCartTotal, toggleCartQty, clearCart, removeFromCart} = cartSlice.actions;
+export const {addToCart, updateCartsFromLocalStorage, getCartTotal, toggleCartQty, clearCart, removeFromCart} = cartSlice.actions;
 export const getAllCarts = (state) => state.cart.carts;
 export const getCartItemsCount = (state) => state.cart.itemsCount;
-export const getCartMessageStatus = (state) => state.cart.isCartMessageOn;
+export const getStatusLogin = (state) => state.cart.statusLogin;
 
 export default cartSlice.reducer;

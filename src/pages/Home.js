@@ -2,17 +2,18 @@ import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductList from '../Components/ProductList/ProductList';
 import HeaderSlider from '../Components/slider/slider';
-import { fetchAsyncProducts, getAllProducts} from '../store/productSlice';
-
+import { fetchAsyncProducts, getAllProducts,getAllProductsStatus} from '../store/productSlice';
+import Loader from "../../src/Components/Loader/Loader";
+import { STATUS } from '../../src/utils/status';
 const HomePage = () => {
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(fetchAsyncProducts(50));
   }, []);
 
   const products = useSelector(getAllProducts);
- 
+  const productStatus = useSelector(getAllProductsStatus);
   // randomizing the products in the list
   const tempProducts = [];
   if(products.length > 0){
@@ -37,7 +38,7 @@ const HomePage = () => {
               <div className='title-md'>
                 <h3>See our products</h3>
               </div>
-              { <ProductList products = {tempProducts} />}
+              { productStatus === STATUS.LOADING ? <Loader /> : <ProductList products = {tempProducts} />}
             </div>
 
             

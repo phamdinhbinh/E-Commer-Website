@@ -3,16 +3,31 @@ import './ProductStyle.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {useParams} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import { fetchAsyncProductSingle, getProductSingle, } from '../../store/productSlice';
+import { fetchAsyncProductSingle, getProductSingle, getSingleProductStatus } from '../../store/productSlice';
 import { addToCart } from '../../store/cartSlice';
+import { STATUS } from '../../utils/status';
+import Loader from '../Loader/Loader';
 const Product = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const product = useSelector(getProductSingle);
+    const singleProductStatus = useSelector(getSingleProductStatus)
     const [quantity, setQuantity] = useState(1);
     useEffect(() => {
       dispatch(fetchAsyncProductSingle(id));
     }, []);
+
+    if(singleProductStatus === STATUS.LOADING){
+        return (
+          <div className='container mt-5' style = {{
+            minHeight: "70vh"
+          }}>
+            <div className='mt-5 py-5 '>
+              <Loader />
+            </div>
+          </div>
+        )
+      }
 
     let temp = (product.price) - (product.price * (product.discountPercentage / 100));
 

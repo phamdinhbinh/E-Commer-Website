@@ -10,7 +10,8 @@ import {Provider} from "react-redux";
 import Login from './Components/login/login';
 import RegistrationForm from './Components/register/register';
 import LogoutButton from './Components/logout';
-
+import Search from './pages/searchPage/searchPage';
+import CategoryProduct from './pages/CategoryProductPage/CategoryProductPage';
 function App() {
   return (
     <>
@@ -24,6 +25,8 @@ function App() {
             <Route path='login' element={<Login/>} />
             <Route path='register' element={<RegistrationForm/>} />
             <Route path='logout' element={<LogoutButton/>} />
+            <Route path = "/search/:searchTerm" element = {<Search />} />
+            <Route path = "/category/:category" element = {<CategoryProduct />} />
           </Route>
         </Routes>
       </BrowserRouter>
