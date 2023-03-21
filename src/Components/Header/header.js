@@ -31,11 +31,11 @@ const Header = () => {
   return (
     <>
     <nav className='container-fluid container-header bg-white fixed-top  '>
-    <nav className='container pt-2 ' >
-      <div className='row header-navbar '>
-        <div className='logo width col-2 d-flex align-items-center justify-content-center'>
-            <h4> logo here </h4>
-        </div>
+      <nav className='container pt-2 ' >
+        <div className='row header-navbar '>
+          <div className='logo width col-2 d-flex align-items-center justify-content-center'>
+              <h4> logo here </h4>
+          </div>
 
         <form className="d-flex align-items-center pe-0 border search border-1 rounded-4 bg-white col-6 " role="search">
           <input className="input rounded-0 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
@@ -74,33 +74,28 @@ const Header = () => {
         </div>
           
 
-          <Link className='cart-nav d-flex align-items-center justify-content-center py-8 px-16 ms-1'>
+            <Link className='cart-nav d-flex align-items-center justify-content-center py-8 px-16 ms-1'>
             <FaShoppingCart  className=' mx-1'/>
             <CartModal carts = {carts} />
             </Link>  
-          
+          </div>
         </div>
 
-      </div>
-
-      <div className='row '>
-        <div className='col-2'></div>
-        <div className='category-nav col-10 d-flex ps-0 my-2 '>
-        {
+        <div className='row '>
+          <div className='col-2'></div>
+            <div className='category-nav col-10 d-flex ps-0 my-2 '>
+            {
               categories.slice(0, 8).map((category, idx) => (
-                <div className='nav-category me-2' key = {idx}>
-                  <Link to = {`category/${category}`} className='nav-link '>{category.replace("-", " ")}</Link>
-                </div>
+              <div className='nav-category me-2' key = {idx}>
+                <Link to = {`category/${category}`} className='nav-link '>{category.replace("-", " ")}</Link>
+              </div>
               ))
             }
+          </div>
         </div>
-     
-      </div>
-     </nav>
+      </nav>
     </nav>
-     
-
-    </>
+  </>
   );
 };
 

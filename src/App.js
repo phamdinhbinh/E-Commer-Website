@@ -7,11 +7,12 @@ import ProductDetail from './pages/ProductDetail';
 import store from "./store/store";
 import Cart from './pages/Cart';
 import {Provider} from "react-redux";
-import Login from './Components/login/login';
-import RegistrationForm from './Components/register/register';
-import LogoutButton from './Components/logout';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import Profile from './Components/Profile/Profile';
 import Search from './pages/searchPage/searchPage';
-import CategoryProduct from './pages/CategoryProductPage/CategoryProductPage';
+import LogoutButton from './pages/logoutButton/logoutButton';
+import CategoryProduct from './pages/categoryProduct/categoryProduct';
 function App() {
   return (
     <>
@@ -22,11 +23,12 @@ function App() {
             <Route index element={<Home />} />
             <Route path='/product/:id' element={<ProductDetail />} />
             <Route path='cart' element={<Cart />} />
-            <Route path='login' element={<Login/>} />
-            <Route path='register' element={<RegistrationForm/>} />
             <Route path='logout' element={<LogoutButton/>} />
             <Route path = "/search/:searchTerm" element = {<Search />} />
             <Route path = "/category/:category" element = {<CategoryProduct />} />
+            <Route path='Register' element = {<Register/>} />
+            <Route path='Profile' element = {<Profile/>} />
+            <Route path='Login' element = {<Login/>} />
           </Route>
         </Routes>
       </BrowserRouter>
