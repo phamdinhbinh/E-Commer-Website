@@ -7,12 +7,12 @@ import ProductDetail from './pages/ProductDetail';
 import store from "./store/store";
 import Cart from './pages/Cart';
 import {Provider} from "react-redux";
-import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
-import Profile from './Components/Profile/Profile';
+import Login from '././Components/login/Login';
+import Register from '././Components/register/Register';
+import Profile from '././Components/Profile/Profile';
 import Search from './pages/searchPage/searchPage';
-import LogoutButton from './pages/logoutButton/logoutButton';
-import CategoryProduct from './pages/categoryProduct/categoryProduct';
+import LogoutButton from '././Components/logout';
+import CategoryProduct from '././pages/CategoryProductPage/CategoryProductPage';
 function App() {
   return (
     <>

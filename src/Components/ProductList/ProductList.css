@@ -1,3 +1,47 @@
-.product-lists{
-    
-}
+.product-skeleton {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+  
+  .skeleton-img {
+    width: 300px;
+    height: 260px;
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
+  .skeleton-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .skeleton-title {
+    height: 30px;
+    width: 80%;
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+  
+  .skeleton-price {
+    height: 30px;
+    width: 50%;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .blink {
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0.5;
+    }
+  }

@@ -31,7 +31,8 @@ const initialState = {
     carts: getCartFromLocalStorage(),
     itemsCount: 0,
     totalAmount: 0,
-    statusLogin: false
+    statusLogin: false,
+    nameUserLogin: '',
 }
 
 const cartSlice = createSlice({
@@ -39,7 +40,6 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            console.log('test',state.statusLogin);
             const cartObject = JSON.parse(localStorage.getItem('statusUser'));
             if (!cartObject ||cartObject.login !== true) {
                 // Không cho thêm vào giỏ hàng nếu chưa đăng nhập
@@ -70,18 +70,15 @@ const cartSlice = createSlice({
                 state.carts.push(action.payload);
                 storeInLocalStorage(state.carts);
             }
-           
         },
 
         removeFromCart: (state, action) => {
             const tempCart = state.carts.filter(item => item.id !== action.payload);
             state.carts = tempCart;
-            
         },
 
         clearCart: (state) => {
             state.carts = [];
-            
         },
 
         getCartTotal: (state) => {
@@ -117,23 +114,53 @@ const cartSlice = createSlice({
             });
 
             state.carts = tempCart;
-            
         },
         updateCartsFromLocalStorage: (state) => {
             state.carts = getCartFromLocalStorage();
             const cartObject = JSON.parse(localStorage.getItem('statusUser'));
             if (!cartObject ||cartObject.login !== true) 
                 {state.statusLogin = false;}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-            else state.statusLogin = true;       
-            
+            else {
+                state.statusLogin = true;
+                state.nameUserLogin= cartObject.nameUser;
+              }     
+        },   
+
+        setCartMessageOn: (state) => {
+            state.isCartMessageOn = true;
+        },
+
+        setCartMessageOff: (state) => {
+            state.isCartMessageOn = false;
+        },
+
+        updateProductQuantity: (state, action) => {
+            const tempCart = state.carts.map(item => {
+                if(item.id === action.payload.id){
+                    let tempQty = action.payload.quantity;
+                    let tempTotalPrice = tempQty * item.discountedPrice;
+
+                    return {...item, quantity: tempQty, totalPrice: tempTotalPrice};
+                } else {
+                    return item;
+                }
+            });
+
+            state.carts = tempCart;
+        },
+
+        deleteProduct: (state, action) => {
+            const tempCart = state.carts.filter(item => item.id !== action.payload);
+            state.carts = tempCart;
         }
     }
 
 });
 
-export const {addToCart, updateCartsFromLocalStorage, getCartTotal, toggleCartQty, clearCart, removeFromCart} = cartSlice.actions;
+export const {addToCart,updateCartsFromLocalStorage, setCartMessageOff, setCartMessageOn, getCartTotal, toggleCartQty, clearCart, removeFromCart, updateProductQuantity, deleteProduct} = cartSlice.actions;
 export const getAllCarts = (state) => state.cart.carts;
 export const getCartItemsCount = (state) => state.cart.itemsCount;
 export const getStatusLogin = (state) => state.cart.statusLogin;
-
+export const getCartMessageStatus = (state) => state.cart.isCartMessageOn;
+export const getNameUserLogin = (state) => state.cart.nameUserLogin;
 export default cartSlice.reducer;

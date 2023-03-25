@@ -30,7 +30,7 @@ const HeaderSlider = () => {
                     <h1>50% Off For Your First Shopping</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.</p>
                 </div>
-                <div className='slider-item-img'>
+                <div className='slider-item-img d-flex align-items-center justify-content-center'>
                 <img src = {slide_1} alt = "" />
                 </div>
             </div>
@@ -39,7 +39,7 @@ const HeaderSlider = () => {
                     <h1>50% Off For Your First Shopping</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.</p>
                 </div>
-                <div className='slider-item-img'>
+                <div className='slider-item-img d-flex align-items-center justify-content-center'>
                 <img src = {slide_2} alt = "" />
                 </div>
             </div>
@@ -48,7 +48,7 @@ const HeaderSlider = () => {
                     <h1>50% Off For Your First Shopping</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.</p>
                 </div>
-                <div className='slider-item-img'>
+                <div className='slider-item-img d-flex align-items-center justify-content-center'>
                 <img src = {slide_3} alt = "" />
                 </div>
             </div>
@@ -59,7 +59,7 @@ const HeaderSlider = () => {
                     <h1 >50% Off For Your First Shopping</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.</p>
                 </div>
-                <div className='slider-item-img' >
+                <div className='slider-item-img d-flex align-items-center justify-content-center' >
                 <img src = {slide_4} alt = "" />
                 </div>
               

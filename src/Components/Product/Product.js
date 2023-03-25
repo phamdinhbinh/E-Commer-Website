@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Product.css'
-
+import { STATUS } from '../../utils/status';
 const Product = ({product}) => {
   
   return (

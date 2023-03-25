@@ -4,7 +4,7 @@ import {FiHome,FiUser} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import {useSelector, useDispatch } from 'react-redux';
 import {fetchAsyncCategories, getAllCategories } from '../../store/categorySlice';
-import { getAllCarts, getCartItemsCount, getStatusLogin, updateCartsFromLocalStorage } from '../../store/cartSlice';
+import { getAllCarts, getCartItemsCount, getStatusLogin, updateCartsFromLocalStorage,getNameUserLogin } from '../../store/cartSlice';
 import CartModal from '../nav-cart/navCart';
 import './Style.css';
 import UserNav from '../nav-user/nav-user';
@@ -15,6 +15,7 @@ const Header = () => {
   const categories = useSelector(getAllCategories);
   const carts = useSelector(getAllCarts);
   const statusLogin = useSelector(getStatusLogin);
+  const nameUserLogin = useSelector(getNameUserLogin);
   const [searchTerm, setSearchTerm] = useState("");
 
 
@@ -32,56 +33,54 @@ const Header = () => {
     <>
     <nav className='container-fluid container-header bg-white fixed-top  '>
       <nav className='container pt-2 ' >
-        <div className='row header-navbar '>
-          <div className='logo width col-2 d-flex align-items-center justify-content-center'>
+        <div className='row header-navbar d-flex  '>
+          <div className='logo col-4 col-md-2 d-flex align-items-center justify-content-center'>
               <h4> logo here </h4>
           </div>
 
-        <form className="d-flex align-items-center pe-0 border search border-1 rounded-4 bg-white col-6 " role="search">
+        <form className="search-form d-none d-md-flex align-items-center pe-0 border search border-1 rounded-4 bg-white col-6 " role="search">
           <input className="input rounded-0 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
           <Link to = {`search/${searchTerm}`} className="btn-nav btn-outline-success border-0  d-flex text-primary align-items-center justify-content-around m-0 h-100 rounded-end-4  " type="submit">
             Search</Link>
         </form>
 
-        <div className='user col-4 d-flex justify-content-end align-items-center'>
-          <div className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center'>
+        <div className='user col-8 col-md-4 d-flex justify-content-end align-items-center'>
+          <Link  to='/' className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center'>
             <FiHome  className='mx-2' /> 
-            <Link to='/' className='user-nav-content-home'>
+            <div className='user-nav-content-home d-none d-md-block'>
                 Trang chủ 
-            </Link>
             </div>
+          </Link>
         <div className='dropdown'>
           <div className='user-nav d-flex  test py-8 px-16 justify-content-center mx-2 align-items-center' type="button" id='dropdownMenuButton' data-bs-toggle="dropdown" aria-expanded="false" >
             <FiUser  className=' mx-2' /> 
-            <div className='user-nav-content'>
+            <div className='user-nav-content d-none d-md-block '>
               Tài khoản 
             </div>
           </div>
           { statusLogin?
             <ul className="dropdown-menu">
-              <li><Link className="dropdown-item" href="#"> Bình </Link></li>
-              <li><Link className="dropdown-item" href="#">Action</Link></li>
-              <li><Link className="dropdown-item" href="#">Another action</Link></li>
-              <li><Link className="dropdown-item" href="#">Something else here</Link></li>
+              <li><Link className="dropdown-item" href="#"> {nameUserLogin} </Link></li>
+              <li><Link to = '/logout' className="dropdown-item" href="#">Logout</Link></li>
+              <li><Link to = '/profile' className="dropdown-item" href="#">Profile</Link></li>
             </ul>
           : <ul className='dropdown-menu' >
-            <li><a className='dropdown-item' href='#'>Option 2.1</a></li>
-            <li><a className='dropdown-item' href='#'>Option 2.2</a></li>
-            <li><a className='dropdown-item' href='#'>Option 2.3</a></li>
+            <li><Link to='/login' className='dropdown-item' href='#'>Login</Link></li>
+            <li><Link to='/register' className='dropdown-item' href='#'>Register</Link></li>
           </ul>
           }
           
         </div>
           
 
-            <Link className='cart-nav d-flex align-items-center justify-content-center py-8 px-16 ms-1'>
+            <Link to='/cart' className='cart-nav d-flex align-items-center justify-content-center py-8 px-16 ms-1'>
             <FaShoppingCart  className=' mx-1'/>
             <CartModal carts = {carts} />
             </Link>  
           </div>
         </div>
 
-        <div className='row '>
+        <div className='row d-none d-md-flex '>
           <div className='col-2'></div>
             <div className='category-nav col-10 d-flex ps-0 my-2 '>
             {

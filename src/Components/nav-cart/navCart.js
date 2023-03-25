@@ -1,6 +1,7 @@
 import React from "react";
 import './navCart.css';
 import shopping_cart from '../../utils/img/shopping_cart.png'
+import { Link } from "react-router-dom";
 const CartModal = ({carts}) => {
 return (
     <div className="cart-modal">
@@ -24,7 +25,7 @@ return (
               })
             }
 
-            <div className='view-cart-btn '>View My Shopping Cart</div>
+            <Link to= '/cart' className='view-cart-btn '>View My Shopping Cart</Link>
           </div>) : (
           <div className = "d-flex flex-column align-items-center justify-content-center cart-modal-empty">
             <img src = {shopping_cart} alt = "" className='w-50' />

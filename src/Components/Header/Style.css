@@ -7,6 +7,7 @@
     font-size: 13px;
    line-height: 24px;
 }
+
 .main-content {
     margin-top: 80px;
    
@@ -17,6 +18,7 @@
 .container-header{
     height: 80px;
 }
+
 .search {
     height: 40px;
 }
@@ -24,6 +26,7 @@
     height: 40px ;
 }
 .user-nav {
+    text-decoration: none !important;
     width: 120px ;
     height: 40px;
     font-size: 20px;
@@ -107,3 +110,12 @@
   color: rgb(128, 128, 137);
 
 }
+
+@media (max-width: 768px) {
+    .user-nav{
+        width: 40px;
+    }
+    .logo{
+        font-size: 10px;
+    }
+  }

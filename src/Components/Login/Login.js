@@ -1,8 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './Login.css'
+import {useSelector, useDispatch} from "react-redux";
+import { updateCartsFromLocalStorage } from '../../store/cartSlice';
+import { useState } from "react";
 const Login = () =>
 {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const handleUsernameChange = (event) => {
+      setUsername(event.target.value);
+    };
+  
+    const handlePasswordChange = (event) => {
+      setPassword(event.target.value);
+    };
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const storedValue = localStorage.getItem(username);
+      const storedPassword = JSON.parse(storedValue)?.password;
+      if (storedPassword === password) {
+        const user = {
+         nameUser: username,
+          login: true
+        };
+        localStorage.setItem('statusUser', JSON.stringify(user));
+        dispatch(updateCartsFromLocalStorage());
+        alert('Đăng nhập thành công!');
+      } else {
+        alert('Sai tên đăng nhập hoặc mật khẩu!');
+      }
+    };
+  
     return (
             <div style={{marginTop:'100px'}}>
             <div id="intro" className="bg-image shadow-2-strong">
@@ -10,14 +41,14 @@ const Login = () =>
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-xl-5 col-md-8">
-                                <form className="bg-white  rounded-5 shadow-5-strong p-5">
+                                <form onSubmit={handleSubmit} className="bg-white  rounded-5 shadow-5-strong p-5">
                                     <div className="form-outline mb-4">
                                         <label className="form-label" for="form1Example1">Email address</label>
-                                        <input type="email" id="form1Example1" placeholder="Press your email" className="form-control" />
+                                        <input type="text" id="form1Example1" placeholder="Press your email" className="form-control" value={username} onChange={handleUsernameChange} />
                                     </div>
                                     <div className="form-outline mb-4">
                                         <label className="form-label" for="form1Example2">Password</label>
-                                        <input type="password" id="form1Example2" placeholder="Press your password" className="form-control" />
+                                        <input type="password" id="form1Example2" placeholder="Press your password" className="form-control" value={password} onChange={handlePasswordChange} />
                                     </div>
                                     <div className="row mb-4">
                                         <div className="col d-flex justify-content-center">

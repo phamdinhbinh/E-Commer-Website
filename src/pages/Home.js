@@ -33,12 +33,12 @@ const HomePage = () => {
       <div className='main-content  bg-light '>
         <div className='container '>
           <HeaderSlider/>
-          <div className='categories py-5 '>
+          <div className='categories py-md-5 '>
             <div className='categories-item'>
               <div className='title-md'>
                 <h3>See our products</h3>
               </div>
-              { productStatus === STATUS.LOADING ? <Loader /> : <ProductList products = {tempProducts} />}
+              {  <ProductList products = {tempProducts} />}
             </div>
 
             

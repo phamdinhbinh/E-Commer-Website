@@ -17,7 +17,7 @@
    
 }
 .product-item-img:hover{
-    transform: scale(1.1);
+    transform: scale(1.03);
     z-index: 1;
 }
 .category{
@@ -86,4 +86,7 @@
     background-color: #F94E30;
     width: 60px;
 }
+
+
+  
 
