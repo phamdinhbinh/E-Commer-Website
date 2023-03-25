@@ -242,6 +242,7 @@ div.section>div>input {
     margin-top: 8rem;
     width: 100%;
     height: 500px;
+    animation: blink 1s infinite;
 }
 .product-skeleton .row {
     width: 100%;
@@ -287,3 +288,10 @@ div.section>div>input {
     border-radius: 8px;
     margin-top: 15px;
 }
+
+
+@keyframes blink {
+    50% {
+      opacity: 0.5;
+    }
+  }
