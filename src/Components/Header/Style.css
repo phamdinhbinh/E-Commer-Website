@@ -5,7 +5,7 @@
    
     height: 36px;
     font-size: 13px;
-   line-height: 24px;
+    line-height: 24px;
 }
 
 .main-content {
@@ -17,6 +17,12 @@
 }
 .container-header{
     height: 80px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+
 }
 
 .search {
@@ -115,7 +121,5 @@
     .user-nav{
         width: 40px;
     }
-    .logo{
-        font-size: 10px;
-    }
+   
   }

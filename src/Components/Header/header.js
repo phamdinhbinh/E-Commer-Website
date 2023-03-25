@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
-import {FiHome,FiUser} from 'react-icons/fi';
+import {FiHome,FiUser,FiMenu} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import {useSelector, useDispatch } from 'react-redux';
 import {fetchAsyncCategories, getAllCategories } from '../../store/categorySlice';
+import {setSidebarOn} from '../../store/SidebarSlice'
 import { getAllCarts, getCartItemsCount, getStatusLogin, updateCartsFromLocalStorage,getNameUserLogin } from '../../store/cartSlice';
 import CartModal from '../nav-cart/navCart';
 import './Style.css';
@@ -17,7 +18,7 @@ const Header = () => {
   const statusLogin = useSelector(getStatusLogin);
   const nameUserLogin = useSelector(getNameUserLogin);
   const [searchTerm, setSearchTerm] = useState("");
-
+  
 
   const handleSearchTerm = (e) => {
     e.preventDefault();
@@ -31,9 +32,13 @@ const Header = () => {
 
   return (
     <>
-    <nav className='container-fluid container-header bg-white fixed-top  '>
-      <nav className='container pt-2 ' >
-        <div className='row header-navbar d-flex  '>
+    <nav className='container-fluid container-header bg-white  px-0  '>
+      <nav className='container pt-2 px-0 ' >
+        <div className='row header-navbar d-flex '>
+          <div className='menu col-4 d-md-none ' onClick={() => dispatch(setSidebarOn())}>
+          <FiMenu className='ms-1'></FiMenu>
+          </div>
+
           <div className='logo col-4 col-md-2 d-flex align-items-center justify-content-center'>
               <h4> logo here </h4>
           </div>
@@ -44,15 +49,15 @@ const Header = () => {
             Search</Link>
         </form>
 
-        <div className='user col-8 col-md-4 d-flex justify-content-end align-items-center'>
-          <Link  to='/' className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center'>
+        <div className='user col-4 col-md-4 d-flex justify-content-end align-items-center '>
+          <Link  to='/' className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center d-none d-md-flex'>
             <FiHome  className='mx-2' /> 
-            <div className='user-nav-content-home d-none d-md-block'>
+            <div className='user-nav-content-home '>
                 Trang chủ 
             </div>
           </Link>
         <div className='dropdown'>
-          <div className='user-nav d-flex  test py-8 px-16 justify-content-center mx-2 align-items-center' type="button" id='dropdownMenuButton' data-bs-toggle="dropdown" aria-expanded="false" >
+          <div className='user-nav d-flex  test py-8 px-16 justify-content-center mx-md-2 align-items-center' type="button" id='dropdownMenuButton' data-bs-toggle="dropdown" aria-expanded="false" >
             <FiUser  className=' mx-2' /> 
             <div className='user-nav-content d-none d-md-block '>
               Tài khoản 
@@ -73,7 +78,7 @@ const Header = () => {
         </div>
           
 
-            <Link to='/cart' className='cart-nav d-flex align-items-center justify-content-center py-8 px-16 ms-1'>
+            <Link to='/cart' className='cart-nav d-flex align-items-center justify-content-center py-8 px-16 mx-1'>
             <FaShoppingCart  className=' mx-1'/>
             <CartModal carts = {carts} />
             </Link>  
