@@ -8,7 +8,7 @@ import store from "./store/store";
 import Cart from './pages/Cart';
 import {Provider} from "react-redux";
 import Login from '././Components/Login/Login';
-import Register from '././Components/register/register';
+import Register from './Components/register/register';
 import Profile from '././Components/Profile/Profile';
 import Search from './pages/searchPage/searchPage';
 import CategoryProduct from '././pages/CategoryProductPage/CategoryProductPage';
@@ -30,7 +30,7 @@ function App() {
             <Route path = "/category/:category" element = {<CategoryProduct />} />
             <Route path='Register' element = {<Register/>} />
             {/* <Route path='Profile' element = {<Profile/>} /> */}
-            {/* <Route path='Login' element = {<Login/>} /> */}
+            <Route path='Login' element = {<Login/>} />
             <Route path='Loginfb' element = {<Loginfb/>} />
           </Route>
         </Routes>
