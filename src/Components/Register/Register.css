@@ -210,6 +210,12 @@ body{
     
 }
 
+.error{
+   color : red;
+   border: 1px solid red;
+   border-radius: 8px;
+}
+
 @media (max-width: 575px) {
 
     .wrapper{
@@ -223,3 +229,4 @@ body{
         padding: 25px;
     }
 }
+

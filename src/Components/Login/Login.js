@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Navigate } from "react-router-dom";
 import './Login.css'
 import {useSelector, useDispatch} from "react-redux";
-import { updateCartsFromLocalStorage } from '../../store/cartSlice';
+import { updateCartsFromLocalStorage,getStatusLogin } from '../../store/cartSlice';
 import { useState } from "react";
 const Login = () =>
 {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const statusLogin = useSelector(getStatusLogin);
     const dispatch = useDispatch();
     const handleUsernameChange = (event) => {
       setUsername(event.target.value);
@@ -23,8 +24,8 @@ const Login = () =>
       const storedPassword = JSON.parse(storedValue)?.password;
       if (storedPassword === password) {
         const user = {
-         nameUser: username,
-          login: true
+         nameUser:  JSON.parse(storedValue).firstName,
+         login: true
         };
         localStorage.setItem('statusUser', JSON.stringify(user));
         dispatch(updateCartsFromLocalStorage());
@@ -35,6 +36,7 @@ const Login = () =>
     };
   
     return (
+        statusLogin ? (<Navigate to ='/' />) : (
             <div style={{marginTop:'100px'}}>
             <div id="intro" className="bg-image shadow-2-strong">
                 <div className="mask d-flex align-items-center h-100" style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}>
@@ -72,7 +74,7 @@ const Login = () =>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>)
     );
 }
 export default Login;

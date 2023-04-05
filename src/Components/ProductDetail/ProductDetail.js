@@ -5,10 +5,9 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAsyncProductSingle, getProductSingle,getSingleProductStatus } from '../../store/productSlice';
 import { Link } from "react-router-dom";
-import { addToCart, getCartMessageStatus, setCartMessageOff, setCartMessageOn } from '../../store/cartSlice';
-import CartMessage from '../CartMessage/CartMessage'
+// import { addToCart, getCartMessageStatus, setCartMessageOff, setCartMessageOn } from '../../store/cartSlice';
+import { addToCart} from '../../store/cartSlice1';
 import { STATUS } from '../../utils/status';
-import Loader from '../Loader/Loader';
 const Product = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -23,7 +22,7 @@ const Product = () => {
     const circles = document.querySelectorAll('.attr');
     const [showDetail, setShowDetail] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
-    const cartMessageStatus = useSelector(getCartMessageStatus);
+    // const cartMessageStatus = useSelector(getCartMessageStatus);
 
     useEffect(() => {
         dispatch(fetchAsyncProductSingle(id));
@@ -63,7 +62,7 @@ const Product = () => {
         let totalPrice = quantity * discountedPrice;
 
         dispatch(addToCart({ ...product, quantity: quantity, totalPrice, discountedPrice }));
-        dispatch(setCartMessageOn(true));
+       
     }
     return (
         <div id='product-detail-container' className="container product-detail-container">

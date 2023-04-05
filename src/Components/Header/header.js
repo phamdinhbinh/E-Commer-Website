@@ -5,18 +5,23 @@ import { Link } from 'react-router-dom';
 import {useSelector, useDispatch } from 'react-redux';
 import {fetchAsyncCategories, getAllCategories } from '../../store/categorySlice';
 import {setSidebarOn} from '../../store/SidebarSlice'
-import { getAllCarts, getCartItemsCount, getStatusLogin, updateCartsFromLocalStorage,getNameUserLogin } from '../../store/cartSlice';
+// import { getAllCarts, getStatusLogin, updateCartsFromLocalStorage,getNameUserLogin } from '../../store/cartSlice';
 import CartModal from '../nav-cart/navCart';
 import './Style.css';
-import UserNav from '../nav-user/nav-user';
+import { setDoc,doc,getDoc  } from 'firebase/firestore';
+import { db, auth } from '../../firebase/firebase';
+import { updateToCart,getStatusLogin, getDisplayName, getAllCarts } from '../../store/cartSlice1';
+import {  signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, signOut } from 'firebase/auth';
 
+ const fbProvider = new FacebookAuthProvider();
+//  const googleProvider = new GoogleAuthProvider();
 
 const Header = () => {
   const dispatch = useDispatch();
   const categories = useSelector(getAllCategories);
   const carts = useSelector(getAllCarts);
   const statusLogin = useSelector(getStatusLogin);
-  const nameUserLogin = useSelector(getNameUserLogin);
+  const nameUserLogin = useSelector(getDisplayName);
   const [searchTerm, setSearchTerm] = useState("");
   
 
@@ -24,10 +29,43 @@ const Header = () => {
     e.preventDefault();
     setSearchTerm(e.target.value);
   }
+  // Xử lý logic để login với fb
+  const handleLogin = async (provider) => {
+    const { user } = await signInWithPopup(auth, provider);
+    const userRef = doc(db, 'users', user.uid); 
+    const userDoc = await getDoc(userRef); 
+  
+    if (userDoc.exists()) {
+      console.log('tài khoản đã tồn tại')
+      dispatch(updateToCart());
+    
+    } else {
+      await setDoc(userRef,{ 
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid,
+      });
+    }
+  
+  };
+  // Xử lý logic để logout user
+  const handleLogout = async () => {
+    await signOut(auth)
+    .then(() => {
+      // Đăng xuất thành công
+      console.log("Đăng xuất thành công");
+      console.log( auth.currentUser);
+      dispatch(updateToCart());
+    })
+    .catch((error) => {
+      console.log("Đăng xuất thất bại");
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchAsyncCategories())
-    dispatch(updateCartsFromLocalStorage())
+    // dispatch(updateCartsFromLocalStorage())
   }, [dispatch])
 
   return (
@@ -50,28 +88,32 @@ const Header = () => {
         </form>
 
         <div className='user col-4 col-md-4 d-flex justify-content-end align-items-center '>
-          <Link  to='/' className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center d-none d-md-flex'>
+          <Link  to='/' className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center '>
             <FiHome  className='mx-2' /> 
-            <div className='user-nav-content-home '>
+            <div className='user-nav-content-home d-none d-md-flex'>
                 Trang chủ 
             </div>
           </Link>
-        <div className='dropdown'>
-          <div className='user-nav d-flex  test py-8 px-16 justify-content-center mx-md-2 align-items-center' type="button" id='dropdownMenuButton' data-bs-toggle="dropdown" aria-expanded="false" >
-            <FiUser  className=' mx-2' /> 
-            <div className='user-nav-content d-none d-md-block '>
+          <div className='dropdown'>
+            <div className='user-nav d-flex  test py-8 px-16 justify-content-center mx-md-2 align-items-center' type="button" id='dropdownMenuButton' data-bs-toggle="dropdown" aria-expanded="false" >
+              <FiUser  className=' mx-2' /> 
+              <div className='user-nav-content d-none d-md-block '>
               Tài khoản 
+              </div>
             </div>
-          </div>
-          { statusLogin?
+            { statusLogin?
             <ul className="dropdown-menu">
-              <li><Link className="dropdown-item" href="#"> {nameUserLogin} </Link></li>
-              <li><Link to = '/logout' className="dropdown-item" href="#">Logout</Link></li>
-              <li><Link to = '/profile' className="dropdown-item" href="#">Profile</Link></li>
+              <li className='d-flex me-0 align-items-center  justify-content-start'>
+                <Link className="dropdown-item text-uppercase fw-bold ps-3" href="#">
+                {/* <div className='small pe-1'>Hello!</div> */}
+                   {nameUserLogin} </Link>
+                </li>
+              <li className='me-0'><Link className="dropdown-item w-100" href="#" onClick={() =>handleLogout()}>Logout</Link></li>
+              <li className='me-0'><Link to = '/profile' className="dropdown-item w-100" href="#">Profile</Link></li>
             </ul>
-          : <ul className='dropdown-menu' >
-            <li><Link to='/login' className='dropdown-item' href='#'>Login</Link></li>
-            <li><Link to='/register' className='dropdown-item' href='#'>Register</Link></li>
+            : <ul className='dropdown-menu' >
+            <li className='me-0'><Link  className='dropdown-item w-100' href='#' onClick={() => handleLogin(fbProvider)}>Login</Link></li>
+            <li className='me-0'><Link to='/register' className='dropdown-item w-100' href='#'>Register</Link></li>
           </ul>
           }
           
