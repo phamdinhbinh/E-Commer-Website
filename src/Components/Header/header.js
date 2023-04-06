@@ -13,7 +13,7 @@ import { db, auth } from '../../firebase/firebase';
 import { updateToCart,getStatusLogin, getDisplayName, getAllCarts } from '../../store/cartSlice1';
 import {  signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, signOut } from 'firebase/auth';
 
- const fbProvider = new FacebookAuthProvider();
+ const fbProvider = new GoogleAuthProvider();
 //  const googleProvider = new GoogleAuthProvider();
 
 const Header = () => {
@@ -112,7 +112,7 @@ const Header = () => {
               <li className='me-0'><Link to = '/profile' className="dropdown-item w-100" href="#">Profile</Link></li>
             </ul>
             : <ul className='dropdown-menu' >
-            <li className='me-0'><Link  className='dropdown-item w-100' href='#' onClick={() => handleLogin(fbProvider)}>Login</Link></li>
+            <li className='me-0'><Link to = '/loginfb'  className='dropdown-item w-100' href='#' >Login</Link></li>
             <li className='me-0'><Link to='/register' className='dropdown-item w-100' href='#'>Register</Link></li>
           </ul>
           }

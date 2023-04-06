@@ -37,6 +37,9 @@ export default function Login() {
     statusLogin ? (<Navigate to ='/' />) : (
     <div className='container d-flex justify-content-center mt-5 pt-5'>
       <div className='login d-flex w-50 rounded-5 shadow-2-strong align-items-center justify-content-center ' >
+          <button className='button-login rounded-3 ' onClick={() => handleLogin(googleProvider)}>
+             Đăng nhập bằng google 
+          </button>
           <button className='button-login rounded-3 ' onClick={() => handleLogin(fbProvider)}>
              Đăng nhập bằng Facebook 
           </button>

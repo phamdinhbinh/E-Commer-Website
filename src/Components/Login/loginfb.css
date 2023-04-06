@@ -1,10 +1,11 @@
 .login{
     height: 400px;
     background: #659ff7;
-    
+    flex-direction: column;
 }
 
 .button-login{
     height: 30px;
     font-size: 14px ;
+    margin: 5px;
 }
