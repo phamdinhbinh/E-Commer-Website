@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch } from 'react-redux';
-// import { updateProductQuantity, deleteProduct, getAllCarts } from '../../store/cartSlice';
-import { getAllCarts, removeFromCart,updateQuantityInCart } from '../../store/cartSlice1';
+import { getAllCarts, removeFromCart, updateQuantityInCart } from '../../store/cartSlice1';
 import './CartView.css'
 const CartView = () => {
-   
+
     const products = useSelector(getAllCarts);
     const dispatch = useDispatch();
 
@@ -14,7 +13,7 @@ const CartView = () => {
     useEffect(() => {
         setSelectedProducts(products.map(p => ({ id: p.id, price: p.discountedPrice, quantity: p.quantity })));
     }, [products]);
-    
+
     const handleSelectProduct = (productId) => {
         setSelectedProducts(prevSelectedProducts => {
             const product = products.find(p => p.id === productId);
@@ -34,21 +33,10 @@ const CartView = () => {
 
     const handleQuantityChange = (productId, quantity) => {
         dispatch(updateQuantityInCart({ productId, quantity: parseInt(quantity) }));
-    };  
-      
-
-    // const handleCheckout = () => {
-    //     const grandTotal = selectedProducts.reduce(
-    //         (total, product) => total + product.price * product.quantity,
-    //         0
-    //     );
-    //     alert(`Grand Total: $${grandTotal.toFixed(2)}`);
-    //     console.log(selectedProducts)
-    // };
-
+    };
     const handleDelete = (productId) => {
         dispatch(removeFromCart(productId));
-       
+
     };
 
     return (
@@ -57,12 +45,12 @@ const CartView = () => {
             <table className="table">
                 <thead>
                     <tr>
-                        <th>Select</th>
-                        <th>Product Name</th>
+                        <th></th>
+                        <th>Product</th>
+                        <th>Qty</th>
                         <th>Unit Price</th>
-                        <th>Quantity</th>
                         <th>Total Amount</th>
-                        <th>Action</th>
+                        <th>More</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,16 +64,17 @@ const CartView = () => {
                                 />
                             </td>
                             <td>{product.title}</td>
-                            <td>${product.discountedPrice.toFixed(2)}</td>
+
                             <td>
                                 <input
                                     type="number"
                                     min="1"
                                     max="100"
-                                    value={product.quantity }
+                                    value={product.quantity}
                                     onChange={(e) => handleQuantityChange(product.id, e.target.value)}
                                 />
                             </td>
+                            <td>${product.discountedPrice.toFixed(2)}</td>
 
                             <td>${(product.discountedPrice * product.quantity).toFixed(2)}</td>
                             <td>
@@ -109,18 +98,18 @@ const CartView = () => {
                         <td>
                             Grand Total: ${products.reduce(
                                 (total, product) => {
-                                const selectedProduct = selectedProducts.find(p => p.id === product.id);
-                                if (selectedProduct) {
-                                    return total + (selectedProduct.price * selectedProduct.quantity);
-                                }
-                                return total;
+                                    const selectedProduct = selectedProducts.find(p => p.id === product.id);
+                                    if (selectedProduct) {
+                                        return total + (selectedProduct.price * selectedProduct.quantity);
+                                    }
+                                    return total;
                                 },
                                 0
-                              ).toFixed(2)
-                        }
+                            ).toFixed(2)
+                            }
                         </td>
                         <td>
-                            <button className="btn btn-primary" 
+                            <button className="btn btn-primary"
                             // onClick={handleCheckout}
                             >
                                 Checkout
