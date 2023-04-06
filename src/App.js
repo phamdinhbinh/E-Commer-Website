@@ -24,7 +24,7 @@ function App() {
             <Route path='/product/:id' element={<ProductDetail />} />
             <Route path="/cart" element={<Cart/>} />
             {/* <Route path="/cart" element={<PrivateRoute component ={Cart} />} /> */}
-            <Route path="/Profile" element={<PrivateRoute component={<Profile />} />} />
+            <Route path="/Profile" element={<PrivateRoute component={Profile} />} />
             <Route path = "/search/:searchTerm" element = {<Search />} />
             <Route path = "/category/:category" element = {<CategoryProduct />} />
             {/* <Route path='Profile' element = {<Profile/>} /> */}

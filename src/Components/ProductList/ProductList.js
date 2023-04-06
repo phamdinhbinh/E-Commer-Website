@@ -13,7 +13,7 @@ const ProductList = ({products}) => {
     // Nếu dữ liệu đang tải, hiển thị các skeleton loading
     const arr = Array(10).fill(0);
     const skeletonList = arr.map((value, index) => (
-      <div className="product-skeleton blink d-flex " key={index}>
+      <div className="product-skeleton blink d-flex justify-content-center " key={index}>
         <div className="skeleton-img"></div>
         <div className="skeleton-info mt-2 justify-content-center align-items-center">
           <div className="skeleton-title"></div>

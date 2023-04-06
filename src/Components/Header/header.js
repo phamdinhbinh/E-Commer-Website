@@ -29,31 +29,13 @@ const Header = () => {
     e.preventDefault();
     setSearchTerm(e.target.value);
   }
-  // Xử lý logic để login với fb
-  const handleLogin = async (provider) => {
-    const { user } = await signInWithPopup(auth, provider);
-    const userRef = doc(db, 'users', user.uid); 
-    const userDoc = await getDoc(userRef); 
-  
-    if (userDoc.exists()) {
-      console.log('tài khoản đã tồn tại')
-      dispatch(updateToCart());
-    
-    } else {
-      await setDoc(userRef,{ 
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        uid: user.uid,
-      });
-    }
-  
-  };
+
   // Xử lý logic để logout user
   const handleLogout = async () => {
     await signOut(auth)
     .then(() => {
       // Đăng xuất thành công
+      alert("Đăng xuất thành công");
       console.log("Đăng xuất thành công");
       console.log( auth.currentUser);
       dispatch(updateToCart());
@@ -78,17 +60,17 @@ const Header = () => {
           </div>
 
           <div className='logo col-4 col-md-2 d-flex align-items-center justify-content-center'>
-              <h4> logo here </h4>
+              <h4> Logo Here </h4>
           </div>
 
         <form className="search-form d-none d-md-flex align-items-center pe-0 border search border-1 rounded-4 bg-white col-6 " role="search">
-          <input className="input rounded-0 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
+          <input className="input rounded-5 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
           <Link to = {`search/${searchTerm}`} className="btn-nav btn-outline-success border-0  d-flex text-primary align-items-center justify-content-around m-0 h-100 rounded-end-4  " type="submit">
             Search</Link>
         </form>
 
         <div className='user col-4 col-md-4 d-flex justify-content-end align-items-center '>
-          <Link  to='/' className='d-flex user-nav py-8 px-16 justify-content-center  align-items-center '>
+          <Link  to='/' className='user-nav d-flex py-8 px-16 justify-content-center  align-items-center '>
             <FiHome  className='mx-2' /> 
             <div className='user-nav-content-home d-none d-md-flex'>
                 Trang chủ 
@@ -109,7 +91,7 @@ const Header = () => {
                    {nameUserLogin} </Link>
                 </li>
               <li className='me-0'><Link className="dropdown-item w-100" href="#" onClick={() =>handleLogout()}>Logout</Link></li>
-              <li className='me-0'><Link to = '/profile' className="dropdown-item w-100" href="#">Profile</Link></li>
+              <li className='me-0'><Link to = '/Profile' className="dropdown-item w-100" href="#">Profile</Link></li>
             </ul>
             : <ul className='dropdown-menu' >
             <li className='me-0'><Link to = '/loginfb'  className='dropdown-item w-100' href='#' >Login</Link></li>

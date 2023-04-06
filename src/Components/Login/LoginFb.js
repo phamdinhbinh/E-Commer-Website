@@ -35,14 +35,21 @@ export default function Login() {
  
   return (
     statusLogin ? (<Navigate to ='/' />) : (
-    <div className='container d-flex justify-content-center mt-5 pt-5'>
-      <div className='login d-flex w-50 rounded-5 shadow-2-strong align-items-center justify-content-center ' >
-          <button className='button-login rounded-3 ' onClick={() => handleLogin(googleProvider)}>
-             Đăng nhập bằng google 
-          </button>
-          <button className='button-login rounded-3 ' onClick={() => handleLogin(fbProvider)}>
-             Đăng nhập bằng Facebook 
-          </button>
+    <div className='container-fluid'>
+      <div className='row justify-content-center mt-5 pt-5'>
+        <div className='col-sm-12 col-md-8 col-lg-6'>
+          <div className='card shadow-sm rounded'>
+            <div className='card-body'>
+              <h5 className='card-title mb-4'>Đăng nhập</h5>
+              <button className='btn btn-outline-primary btn-lg mb-3 w-100' onClick={() => handleLogin(googleProvider)}>
+                Đăng nhập bằng Google
+              </button>
+              <button className='btn btn-outline-primary btn-lg w-100' onClick={() => handleLogin(fbProvider)}>
+                Đăng nhập bằng Facebook
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>)
   );

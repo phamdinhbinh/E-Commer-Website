@@ -25,6 +25,9 @@
 
 }
 
+.logo {
+    color: #2f73f1;
+}
 .search {
     height: 40px;
 }
@@ -42,9 +45,14 @@
     cursor: pointer;
     border-radius: 8px;
     background-color: rgba(39, 39, 42, 0.12);
-   
+    color :#2f73f1
 }
-
+.user-nav:hover .user-nav-content{
+    color :#2f73f1
+}
+.user-nav:hover .user-nav-content-home{
+    color :#2f73f1
+}
 .user-nav-content-home {
     font-size: 14px ;
     text-decoration: none ;

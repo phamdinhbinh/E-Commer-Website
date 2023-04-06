@@ -42,7 +42,9 @@ li.active {
     padding-right: 15px;
     background: #ffffff;
 }
-
+.buy-Now{
+    text-decoration: none;
+}
 .title-price {
     margin-top: 30px;
     margin-bottom: 0px;

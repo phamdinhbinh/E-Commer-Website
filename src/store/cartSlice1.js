@@ -27,7 +27,7 @@ export const addToCart = createAsyncThunk(
         const existingProduct = cart[existingProductIndex];
         const updatedProduct = {
           ...existingProduct,
-          quantity: existingProduct.quantity + product.quantity,
+          quantity: parseInt(existingProduct.quantity) + parseInt(product.quantity),
           totalPrice:
             (existingProduct.quantity + product.quantity) * existingProduct.price,
         };

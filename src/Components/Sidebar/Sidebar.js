@@ -16,7 +16,7 @@ const Sidebar = () => {
     e.preventDefault();
     setSearchTerm(e.target.value);
   }
-
+  
   useEffect(() => {
     console.log(sideStatus);
     dispatch(fetchAsyncCategories())
@@ -31,8 +31,8 @@ const Sidebar = () => {
         <div className='cat-title fs-17 text-uppercase fw-6 ls-1h'>All Categories</div>
         
         <form className="search-form d-flex align-items-center pe-0 border search border-1 rounded-4 bg-white col-12 " role="search">
-          <input className="input rounded-0 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
-          <Link to = {`search/${searchTerm}`} className="btn-nav btn-outline-success border-0  d-flex text-primary align-items-center justify-content-around m-0 h-100 rounded-end-4  " type="submit">
+          <input className="input rounded-5 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
+          <Link to = {`search/${searchTerm}`} className="btn-nav btn-outline-success border-0  d-flex text-primary align-items-center justify-content-around m-0 h-100 rounded-end-4  " type="submit" onClick = {() => dispatch(setSidebarOff())}>
             Search</Link>
         </form>
 

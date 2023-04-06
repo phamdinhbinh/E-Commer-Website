@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAsyncProductSingle, getProductSingle,getSingleProductStatus } from '../../store/productSlice';
 import { Link } from "react-router-dom";
-// import { addToCart, getCartMessageStatus, setCartMessageOff, setCartMessageOn } from '../../store/cartSlice';
 import { addToCart} from '../../store/cartSlice1';
 import { STATUS } from '../../utils/status';
+
 const Product = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const Product = () => {
     const singleProductStatus = useSelector(getSingleProductStatus)
     const [quantity, setQuantity] = useState(1);
     const [currentImage, setCurrentImage] = useState(0);
+
     const handleClick = (index) => {
         setCurrentImage(index);
     };
@@ -56,13 +57,16 @@ const Product = () => {
       }
 
     let temp = (product.price) - (product.price * (product.discountPercentage / 100));
-
+    
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
+      }
     const addToCartHandler = (product) => {
         let discountedPrice = (product?.price) - (product?.price * (product?.discountPercentage / 100));
         let totalPrice = quantity * discountedPrice;
 
         dispatch(addToCart({ ...product, quantity: quantity, totalPrice, discountedPrice }));
-       
+        alert("Thêm sản phẩm vào giỏ hàng thành công ");
     }
     return (
         <div id='product-detail-container' className="container product-detail-container">
@@ -105,7 +109,7 @@ const Product = () => {
                     <div className="section" style={{ paddingBottom: '10px' }}>
                         <h4 className="title-attr"><small>Quantity</small></h4>
                         <div className="quantity" >
-                            <input style={{ width: '70%', height: '25px', fontSize: '12px' }} type="number" className="input-text qty text" step="1" min={1} name="quantity" title="Qty" inputMode="numeric" defaultValue={1} />
+                            <input style={{ width: '70%', height: '25px', fontSize: '12px' }} type="number" className="input-text qty text" step="1" min={1} name="quantity" title="Qty" inputMode="numeric" defaultValue={1} onChange={handleQuantityChange} />
                         </div>
 
                     </div>
@@ -114,7 +118,7 @@ const Product = () => {
                             <span className='add-to-cart-btn' onClick={() => { addToCartHandler(product) }}>Add to cart</span>
                         </button>
                         <button type="button" className='buy-now btn'>
-                            <Link to="/cart">
+                            <Link className='buy-Now' to="/cart">
                                 <span className='buy-now-btn'>Buy now</span>
                             </Link>
                         </button>

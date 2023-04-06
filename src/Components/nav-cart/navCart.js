@@ -8,7 +8,7 @@ return (
              <h5 className='cart-modal-title '>Recenlty Added Products</h5>
         {
         (carts?.length > 0) ? (
-          <div className='cart-modal-list grid'>
+          <div className='cart-modal-list grid justify-content-center'>
             {
               carts.map(cart => {
                 return (
@@ -25,7 +25,7 @@ return (
               })
             }
 
-            <Link to= '/cart' className='view-cart-btn '>View My Shopping Cart</Link>
+            <Link to= '/cart' className='view-cart-btn align-items-center justify-content-center  '>View My Shopping Cart</Link>
           </div>) : (
           <div className = "d-flex flex-column align-items-center justify-content-center cart-modal-empty">
             <img src = {shopping_cart} alt = "" className='w-50' />
