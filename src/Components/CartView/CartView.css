@@ -3,7 +3,7 @@
     overflow-x: hidden;
 }
 
-@media only screen and (max-width: 726px) {
+/* @media only screen and (max-width: 726px) {
     .cart-view table td:nth-child(4),
     .cart-view table th:nth-child(4) {
         display: none;
@@ -49,4 +49,4 @@
         font-weight: bold;
         text-align: right;
     }
-}
+} */

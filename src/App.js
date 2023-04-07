@@ -22,13 +22,10 @@ function App() {
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='/product/:id' element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart/>} />
-            {/* <Route path="/cart" element={<PrivateRoute component ={Cart} />} /> */}
+            <Route path="/cart" element={<PrivateRoute component ={Cart} />} />
             <Route path="/Profile" element={<PrivateRoute component={Profile} />} />
             <Route path = "/search/:searchTerm" element = {<Search />} />
             <Route path = "/category/:category" element = {<CategoryProduct />} />
-            {/* <Route path='Profile' element = {<Profile/>} /> */}
-            <Route path='Login' element = {<Login/>} />
             <Route path='Loginfb' element = {<Loginfb/>} />
           </Route>
         </Routes>

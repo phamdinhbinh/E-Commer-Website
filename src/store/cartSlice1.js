@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {doc,getDoc,updateDoc,} from "firebase/firestore";
 import { db, auth } from "../firebase/firebase";
-
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async (product) => {
     // Kiểm tra đăng nhập với Firebase
     const user = auth.currentUser;
     if (!user) {
-      throw new Error("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng");
+      alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng");
     }
 
     // Lấy dữ liệu giỏ hàng từ Firestore
@@ -146,13 +145,14 @@ const cartSlice = createSlice({
       
       .addCase(addToCart.fulfilled, (state, action) => {
         state.carts = action.payload;
-        console.log(state.carts);
+        alert('Thêm sản phẩm vào giỏ hàng thành công')
+        console.log('cart sau khi add',state.carts);
       })
       .addCase(updateToCart.fulfilled, (state, action) => {
         state.carts = action.payload.cart;
         state.statusLogin = action.payload.statusLogin;
         state.displayName = action.payload.displayName;
-        console.log(state.carts);
+        console.log('update cart',state.carts);
       })
       .addCase(removeFromCart.fulfilled, (state, action) => {
         state.carts = action.payload;

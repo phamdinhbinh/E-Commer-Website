@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAsyncProductSingle, getProductSingle, getSingleProductStatus } from '../../store/productSlice';
 import { Link } from "react-router-dom";
-// import { addToCart, getCartMessageStatus, setCartMessageOff, setCartMessageOn } from '../../store/cartSlice';
 import { addToCart } from '../../store/cartSlice1';
 import { STATUS } from '../../utils/status';
 const Product = () => {
@@ -18,7 +17,7 @@ const Product = () => {
     const handleClick = (index) => {
         setCurrentImage(index);
     };
-    const [category, setCategory] = useState('');
+
     useEffect(() => {
         dispatch(fetchAsyncProductSingle(id)).then(() => {
             setDescription(product.category);
@@ -32,10 +31,9 @@ const Product = () => {
         });
     }, [dispatch, id, product.description]);
 
-    const circles = document.querySelectorAll('.attr');
     const [showDetail, setShowDetail] = useState(true);
     const [showDetails, setShowDetails] = useState(true);
-    // const cartMessageStatus = useSelector(getCartMessageStatus);
+
 
     useEffect(() => {
         dispatch(fetchAsyncProductSingle(id));
@@ -77,6 +75,10 @@ const Product = () => {
         dispatch(addToCart({ ...product, quantity: quantity, totalPrice, discountedPrice }));
 
     }
+    const handleQuantityChange = (event) => {
+        const value = parseInt(event.target.value, 10);
+        setQuantity(value);
+      };
     return (
         <div id='product-detail-container' className="container product-detail-container">
             <div className="row">
@@ -118,7 +120,7 @@ const Product = () => {
                     <div className="section" style={{ paddingBottom: '10px' }}>
                         <h4 className="title-attr"><small>Quantity</small></h4>
                         <div className="quantity" >
-                            <input style={{ width: '70%', height: '25px', fontSize: '12px' }} type="number" className="input-text qty text" step="1" min={1} name="quantity" title="Qty" inputMode="numeric" defaultValue={1} />
+                            <input style={{ width: '70%', height: '25px', fontSize: '12px' }} type="number" className="input-text qty text" step="1" min={1} name="quantity" title="Qty" inputMode="numeric" defaultValue={1} onChange={handleQuantityChange} />
                         </div>
 
                     </div>
@@ -127,7 +129,7 @@ const Product = () => {
                             <span className='add-to-cart-btn' onClick={() => { addToCartHandler(product) }}>Add to cart</span>
                         </button>
                         <button type="button" className='buy-now btn' >
-                            <Link to="/cart">
+                            <Link className='btn-buy-now' to="/cart">
                                 <span className='buy-now-btn'>Buy now</span>
                             </Link>
                         </button>

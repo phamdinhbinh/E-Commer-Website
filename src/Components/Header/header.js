@@ -5,16 +5,12 @@ import { Link } from 'react-router-dom';
 import {useSelector, useDispatch } from 'react-redux';
 import {fetchAsyncCategories, getAllCategories } from '../../store/categorySlice';
 import {setSidebarOn} from '../../store/SidebarSlice'
-// import { getAllCarts, getStatusLogin, updateCartsFromLocalStorage,getNameUserLogin } from '../../store/cartSlice';
 import CartModal from '../nav-cart/navCart';
 import './Style.css';
-import { setDoc,doc,getDoc  } from 'firebase/firestore';
-import { db, auth } from '../../firebase/firebase';
+import { auth } from '../../firebase/firebase';
 import { updateToCart,getStatusLogin, getDisplayName, getAllCarts } from '../../store/cartSlice1';
-import {  signInWithPopup, FacebookAuthProvider, GoogleAuthProvider, signOut } from 'firebase/auth';
+import {   signOut } from 'firebase/auth';
 
- const fbProvider = new GoogleAuthProvider();
-//  const googleProvider = new GoogleAuthProvider();
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -37,7 +33,6 @@ const Header = () => {
       // Đăng xuất thành công
       alert("Đăng xuất thành công");
       console.log("Đăng xuất thành công");
-      console.log( auth.currentUser);
       dispatch(updateToCart());
     })
     .catch((error) => {
@@ -64,8 +59,8 @@ const Header = () => {
           </div>
 
         <form className="search-form d-none d-md-flex align-items-center pe-0 border search border-1 rounded-4 bg-white col-6 " role="search">
-          <input className="input rounded-5 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search" onChange={(e) => handleSearchTerm(e)}/>
-          <Link to = {`search/${searchTerm}`} className="btn-nav btn-outline-success border-0  d-flex text-primary align-items-center justify-content-around m-0 h-100 rounded-end-4  " type="submit">
+          <input className="input rounded-5 form-control py-1 px-1 border border-0  " type="search" placeholder="Search" aria-label="Search"  value={searchTerm} onChange={(e) => handleSearchTerm(e)}/>
+          <Link to = {`search/${searchTerm}`} className="btn-nav btn-outline-success border-0  d-flex text-primary align-items-center justify-content-around m-0 h-100 rounded-end-4  " type="submit" onClick={() =>setSearchTerm('')} >
             Search</Link>
         </form>
 
@@ -94,9 +89,9 @@ const Header = () => {
               <li className='me-0'><Link to = '/Profile' className="dropdown-item w-100" href="#">Profile</Link></li>
             </ul>
             : <ul className='dropdown-menu' >
-            <li className='me-0'><Link to = '/loginfb'  className='dropdown-item w-100' href='#' >Login</Link></li>
-            <li className='me-0'><Link to='/register' className='dropdown-item w-100' href='#'>Register</Link></li>
-          </ul>
+                <li className='me-0'><Link to = '/loginfb'  className='dropdown-item w-100' href='#' >Login</Link></li>
+                <li className='me-0'><Link to='/register' className='dropdown-item w-100' href='#'>Register</Link></li>
+              </ul>
           }
           
         </div>

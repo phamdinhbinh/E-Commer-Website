@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const products = useSelector(getAllProducts);
   const productStatus = useSelector(getAllProductsStatus);
-  // randomizing the products in the list
+
   const tempProducts = [];
   if(products.length > 0){
     for(let i in products){

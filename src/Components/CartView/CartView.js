@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllCarts, removeFromCart, updateQuantityInCart } from '../../store/cartSlice1';
-import './CartView.css'
+// import './CartView.css'
 const CartView = () => {
 
     const products = useSelector(getAllCarts);
@@ -40,86 +40,91 @@ const CartView = () => {
     };
 
     return (
-        <div className="cart-view container bg-light">
-            <h1>Shopping Cart</h1>
+        <div className="container mt-5 pt-2">
+          <h1 className="text-center my-5">Shopping Cart</h1>
+          <div className="row">
+          <div className=" col-md-8">
+          <div className="table-responsive">
             <table className="table">
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>Product</th>
-                        <th>Qty</th>
-                        <th>Unit Price</th>
-                        <th>Total Amount</th>
-                        <th>More</th>
-                    </tr>
+                <tr>
+                    <th className='col-1 col-md-1'></th>
+                    <th className="col-4 col-md-2">Product</th>
+                    <th className="col-1 col-md-1">Qty</th>
+                    <th className="col-1 col-md-2">Unit Price</th>
+                    <th className="col-1 col-md-2">Total Amount</th>
+                    <th className="col-1 col-md-1">More</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {products.map((product) => (
-                        <tr key={product.index}>
-                            <td>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedProducts.some((p) => p.id === product.id)}
-                                    onChange={() => handleSelectProduct(product.id)}
-                                />
-                            </td>
-                            <td>{product.title}</td>
+                {products.map((product) => (
+                    <tr key={product.index}>
+                    <td className='col-1 col-md-1'>
+                        <input
+                        type="checkbox"
+                        checked={selectedProducts.some((p) => p.id === product.id)}
+                        onChange={() => handleSelectProduct(product.id)}
+                        />
+                    </td>
+                    <td className="col-4 col-md-2">{product.title}</td>
 
-                            <td>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max="100"
-                                    value={product.quantity}
-                                    onChange={(e) => handleQuantityChange(product.id, e.target.value)}
-                                />
-                            </td>
-                            <td>${product.discountedPrice.toFixed(2)}</td>
+                    <td className="col-1 col-md-1">
+                        <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={product.quantity}
+                        onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                        />
+                    </td>
+                    <td className="col-1 col-md-2">${product.discountedPrice.toFixed(2)}</td>
 
-                            <td>${(product.discountedPrice * product.quantity).toFixed(2)}</td>
-                            <td>
-                                <button
-                                    className="btn btn-delete"
-                                    onClick={() => handleDelete(product.id)}
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    <td className="col-1 col-md-2">${(product.discountedPrice * product.quantity).toFixed(2)}</td>
+                    <td className="col- col-md-1">
+                        <button
+                        className="btn btn-delete"
+                        onClick={() => handleDelete(product.id)}
+                        >
+                        Delete
+                        </button>
+                    </td>
+                    </tr>
+                ))}
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colSpan={5}></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colSpan={4}></td>
-                        <td>
-                            Grand Total: ${products.reduce(
-                                (total, product) => {
-                                    const selectedProduct = selectedProducts.find(p => p.id === product.id);
-                                    if (selectedProduct) {
-                                        return total + (selectedProduct.price * selectedProduct.quantity);
-                                    }
-                                    return total;
-                                },
-                                0
-                            ).toFixed(2)
-                            }
-                        </td>
-                        <td>
-                            <button className="btn btn-primary"
-                            // onClick={handleCheckout}
-                            >
-                                Checkout
-                            </button>
-                        </td>
-                    </tr>
-                </tfoot>
             </table>
+</div>
+
+  </div>
+            <div className="col-md-4">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Order Summary</h5>
+                  <p className="card-text">Items: {selectedProducts.length}</p>
+                  <p className="card-text">Total: ${products.reduce(
+                    (total, product) => {
+                      const selectedProduct = selectedProducts.find(p => p.id === product.id);
+                      if (selectedProduct) {
+                        return total + (selectedProduct.price * selectedProduct.quantity);
+                      }
+                      return total;
+                    },
+                    0
+                  ).toFixed(2)}
+                  </p>
+                  <button
+                    className="btn btn-primary w-100"
+                    // onClick={handleCheckout}
+                  >
+                    Checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      );
+      
+      
 };
 
 export default CartView;

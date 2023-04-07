@@ -18,7 +18,6 @@ const Sidebar = () => {
   }
   
   useEffect(() => {
-    console.log(sideStatus);
     dispatch(fetchAsyncCategories())
   }, [dispatch])
 
